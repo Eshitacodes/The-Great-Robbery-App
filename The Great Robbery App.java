@@ -19,6 +19,8 @@ public class TheGreatRoberyApp
     }
 }
 
+
+
 abstract class Person
 {
     String name;
@@ -26,7 +28,7 @@ abstract class Person
     private int yearOfBorn;
     private String expertIn;
     private Item[] items;
-    Person(String name,String nickname, int yearOfBorn, String expertIn)
+    public Person(String name,String nickname, int yearOfBorn, String expertIn)
     {
         this.name = name;
         this.nickname = nickname;
@@ -61,12 +63,14 @@ abstract class Person
     }
 }
 
+
+
 class Item
 {
     private String name;
-    private double value;
+    public double value;
 
-    void Item(String name, double value) 
+    public Item(String name, double value) 
     {
         this.name = name;
         this.value = value;
@@ -83,11 +87,13 @@ class Item
     }
 }
 
+
+
 class Criminals extends Person
 {
     static final int SUCCESS_PERCENTAGE = 85;
 
-    Criminals(String name, String nickname, int yearOfBorn, String expertIn) 
+    public Criminals(String name, String nickname, int yearOfBorn, String expertIn) 
     {
         super(name, nickname, yearOfBorn, expertIn);
     }
@@ -100,11 +106,13 @@ class Criminals extends Person
 
 }
 
+
+
 class Detective extends Person
 {
     static final int SUCCESS_PERCENTAGE = 75;
 
-    Detective(String name, String nickname, int yearOfBorn, String expertIn)
+    public Detective(String name, String nickname, int yearOfBorn, String expertIn)
     {
         super(name, nickname, yearOfBorn, expertIn);
     }
@@ -116,13 +124,14 @@ class Detective extends Person
 }
     
 
+
 //criminals to steal
 class Building
 {
     private String name;
     private Item[] items; 
 
-    Building(String name, Item[] items) 
+    public Building(String name, Item[] items) 
     {
         this.name = name;
         this.items = items;
@@ -138,13 +147,17 @@ class Building
 
 }
 
+
+
 class City
 {
-    City() 
+    Building[] buildings = new Building[4];
+    
+    public City() 
     {
-        Building[] buildings = new Building[4];
-        
-        Item[] bank = {new Item("Letter opener", 1.5),new Item("Stamp", 2.5) };
+        Item[] bank =new Item[2];
+        bank[0] = new Item("Letter opener", 1.5);
+        bank[1]= new Item("Stamp", 2.5);
         buildings[0] =new Building("Bank", bank);
 
         Item[] mansion = { new Item("Pair of fancy shoes", 25), new Item("Broken glass", 0.1) };
@@ -162,6 +175,9 @@ class City
         return buildings;
     }
 }
+
+
+
 class Gang
 {
     Random random= new Random();
@@ -170,11 +186,11 @@ class Gang
     private Criminals[] criminals;
     private Item[] byAgentE,byAgentA;
 
-    Gang() 
+    public Gang() 
     {
         Criminals[] criminals = new Criminals[2];
 
-        Item[] byAgentE= {new Item("Emarald Necklace",250),new Item("Cash Bag",100)};
+        Item[] byAgentE= {new Item("Emarald Necklace",250), new Item("Cash Bag",100)};
         Item[] byAgentA={ new Item("Diamond Ring",150),new Item("Gold Bangles",175)};
 
         criminals[0] = new Rob("Eshita", "AgentE", 2004, "Searching Valuables", byAgentE);
@@ -185,7 +201,7 @@ class Gang
     {
         for(Item item : byAgentE)
         {
-            sumRobbedValue= byAgentE.value;
+            sumRobbedValue= Item.value;
         }
         for(Item item: byAgentA)
         {
@@ -241,10 +257,12 @@ class Gang
 
 }
 
+
+
 class Police
 {
     private Detective adamPalmer;
-    Police()
+    public Police()
     {
         Detective adamPalmer =new Detective("Adam Palmer","DctvAP",1990,"Suspecting");
     }
