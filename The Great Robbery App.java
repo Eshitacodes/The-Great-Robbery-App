@@ -27,7 +27,7 @@ abstract class Person
     private String nickname;
     private int yearOfBorn;
     private String expertIn;
-    private Item[] items;
+    public Item[] items;
     public Person(String name,String nickname, int yearOfBorn, String expertIn)
     {
         this.name = name;
@@ -37,7 +37,7 @@ abstract class Person
         
     }
 
-    void printBioData()
+    boolean printBioData()
     {
         System.out.println("Name :"+name);
         System.out.println("Nickname: " + nickname);
@@ -49,6 +49,7 @@ abstract class Person
         {
             System.out.println("- " + item.getName());
         }
+        return false;
     }
 
 
@@ -65,9 +66,9 @@ abstract class Person
 
 
 
-class Item
+public class Item
 {
-    private String name;
+    public String name;
     public double value;
 
     public Item(String name, double value) 
@@ -76,7 +77,7 @@ class Item
         this.value = value;
     }
 
-    String getName() 
+    public String getName() 
     {
         return name;
     }
@@ -98,10 +99,11 @@ class Criminals extends Person
         super(name, nickname, yearOfBorn, expertIn);
     }
 
-    void printBioData() 
+    boolean printBioData() 
     {
         System.out.println("Criminal person:");
         super.printBioData();
+        return false;
     }
 
 }
@@ -116,10 +118,11 @@ class Detective extends Person
     {
         super(name, nickname, yearOfBorn, expertIn);
     }
-    void printBioData() 
+    boolean printBioData() 
     {
         System.out.println("Detective:");
         super.printBioData();
+        return false;
     }
 }
     
@@ -183,29 +186,31 @@ class Gang
     Random random= new Random();
     private int randomNumber;
     private double sumRobbedValue;
-    private Criminals[] criminals;
-    private Item[] byAgentE,byAgentA;
+    //public Criminals[] criminals;
+    public Item[] byAgentE,byAgentA;
+
+    Criminals[] criminals = new Criminals[2];
 
     public Gang() 
     {
-        Criminals[] criminals = new Criminals[2];
+        
 
         Item[] byAgentE= {new Item("Emarald Necklace",250), new Item("Cash Bag",100)};
         Item[] byAgentA={ new Item("Diamond Ring",150),new Item("Gold Bangles",175)};
 
-        criminals[0] = new Rob("Eshita", "AgentE", 2004, "Searching Valuables", byAgentE);
-        criminals[1] = new Bobby("Anwesha", "AgentA", 2003, "Unlocking Safes", byAgentA);
+        criminals[0] = new Criminals("Rob", "AgentE", 2004, "Searching Valuables");
+        criminals[1] = new Criminals("Bobby", "AgentA", 2003, "Unlocking Safes");
     }
 
     double getsumRobbedValue()
     {
         for(Item item : byAgentE)
         {
-            sumRobbedValue= Item.value;
+            sumRobbedValue= item.value;
         }
         for(Item item: byAgentA)
         {
-            sumRobbedValue= byAgentA.value;
+            sumRobbedValue= item.value;
         }
         return sumRobbedValue;
     }
@@ -300,7 +305,8 @@ class Police
         {
             System.out.println(adamPalmer.getName()+" managed to catch the gang.");
             System.out.println("They managed to steal items valued $"+ gang.getsumRobbedValue());
-            return false;
+            
         }
+        return false;
     }
 }
