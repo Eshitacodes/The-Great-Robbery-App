@@ -27,6 +27,7 @@ abstract class Person
     private String nickname;
     private int yearOfBorn;
     private String expertIn;
+    Item[] items;
     
     public Person(String name,String nickname, int yearOfBorn, String expertIn)
     {
@@ -135,8 +136,8 @@ class Detective extends Person
 //criminals to steal
 class Building
 {
-    private String name;
-    private Item[] items; 
+    public String name;
+    public Item[] items; 
 
     public Building(String name, Item[] items) 
     {
@@ -188,7 +189,7 @@ class City
 class Gang
 {
     Random random= new Random();
-    private int randomNumber;
+    public int randomNumber;
     public double sumRobbedValue;
     //public Criminals[] criminals;
     //public Item[] byAgentE,byAgentA;
@@ -197,15 +198,15 @@ class Gang
 
     Criminals[] criminals = new Criminals[2];
 
+    
+
     public Gang() 
     {
-        
-
         //Item[] byAgentE= {new Item("Emarald Necklace",250), new Item("Cash Bag",100)};
         //Item[] byAgentA={ new Item("Diamond Ring",150),new Item("Gold Bangles",175)};
 
-        criminals[0] = new Criminals("Rob", "AgentE", 2004, "Searching Valuables");
-        criminals[1] = new Criminals("Bobby", "AgentA", 2003, "Unlocking Safes");
+        criminals[0] = new Criminals("Rob", "AgentR", 2004, "Searching Valuables");
+        criminals[1] = new Criminals("Bobby", "AgentB", 2003, "Unlocking Safes");
 
         items[0]=new Item("Emarald Necklace",250);
         items[1]=new Item("Cash Bag",100);
@@ -215,7 +216,8 @@ class Gang
 
     double getsumRobbedValue()
     {
-        for(Item items : items  )
+
+        /*for(Item items : items  )
         {
             sumRobbedValue= sumRobbedValue+items.value;
         }
@@ -262,6 +264,7 @@ class Gang
         {
                 sumRobbedValue += item.getValue();
                 System.out.println(item.getName());
+                
         }
         }
 
@@ -270,6 +273,8 @@ class Gang
             System.out.println("\nThe gang tried to rob the "+ selectedBuilding.getName() + "but they" + "failed\n");
         }
     }
+
+   
 
 }
 
