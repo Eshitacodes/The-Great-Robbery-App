@@ -23,17 +23,18 @@ public class TheGreatRoberyApp
 
 abstract class Person
 {
-    String name;
+    public String name;
     private String nickname;
     private int yearOfBorn;
     private String expertIn;
-    public Item[] items;
+    
     public Person(String name,String nickname, int yearOfBorn, String expertIn)
     {
         this.name = name;
         this.nickname = nickname;
         this.yearOfBorn = yearOfBorn;
         this.expertIn = expertIn;
+        
         
     }
 
@@ -42,11 +43,14 @@ abstract class Person
         System.out.println("Name :"+name);
         System.out.println("Nickname: " + nickname);
         System.out.println("Year of Birth: " + yearOfBorn);
-        System.out.println("Expert in: " + expertIn);
-        System.out.println("Items:");
+        System.out.println("Expert in:" + expertIn);
+        System.out.println("Items:\n");
 
-        for (Item item : items) 
+        Gang gang=new Gang();
+        
+        for (Item item : gang.items) 
         {
+            
             System.out.println("- " + item.getName());
         }
         return false;
@@ -101,7 +105,7 @@ class Criminals extends Person
 
     boolean printBioData() 
     {
-        System.out.println("Criminal person:");
+        System.out.println("\nCriminal person:\n");
         super.printBioData();
         return false;
     }
@@ -185,9 +189,11 @@ class Gang
 {
     Random random= new Random();
     private int randomNumber;
-    private double sumRobbedValue;
+    public double sumRobbedValue;
     //public Criminals[] criminals;
-    public Item[] byAgentE,byAgentA;
+    //public Item[] byAgentE,byAgentA;
+
+    public Item[] items=new Item[4];
 
     Criminals[] criminals = new Criminals[2];
 
@@ -195,23 +201,28 @@ class Gang
     {
         
 
-        Item[] byAgentE= {new Item("Emarald Necklace",250), new Item("Cash Bag",100)};
-        Item[] byAgentA={ new Item("Diamond Ring",150),new Item("Gold Bangles",175)};
+        //Item[] byAgentE= {new Item("Emarald Necklace",250), new Item("Cash Bag",100)};
+        //Item[] byAgentA={ new Item("Diamond Ring",150),new Item("Gold Bangles",175)};
 
         criminals[0] = new Criminals("Rob", "AgentE", 2004, "Searching Valuables");
         criminals[1] = new Criminals("Bobby", "AgentA", 2003, "Unlocking Safes");
+
+        items[0]=new Item("Emarald Necklace",250);
+        items[1]=new Item("Cash Bag",100);
+        items[2]=new Item("Diamond Ring",150);
+        items[3]=new Item("Gold Bangles",175);
     }
 
     double getsumRobbedValue()
     {
-        for(Item item : byAgentE)
+        for(Item items : items  )
+        {
+            sumRobbedValue= sumRobbedValue+items.value;
+        }
+        /*for(Item item: items)
         {
             sumRobbedValue= item.value;
-        }
-        for(Item item: byAgentA)
-        {
-            sumRobbedValue= item.value;
-        }
+        }*/
         return sumRobbedValue;
     }
 
@@ -245,7 +256,7 @@ class Gang
 
         if(isSuccessfulRobbery()==true)
         {
-            System.out.println("The gang managed to rob the following items from the"+ selectedBuilding.getName() +":");
+            System.out.println("\nThe gang managed to rob the following items from the "+ selectedBuilding.getName() +":\n");
 
         for (Item item : selectedBuilding.getItems()) 
         {
@@ -256,7 +267,7 @@ class Gang
 
         else
         {
-            System.out.println("The gang tried to rob the"+ selectedBuilding.getName() + "but they" + "failed");
+            System.out.println("\nThe gang tried to rob the "+ selectedBuilding.getName() + "but they" + "failed\n");
         }
     }
 
@@ -266,10 +277,10 @@ class Gang
 
 class Police
 {
-    private Detective adamPalmer;
+    public Detective adamPalmer;
     public Police()
     {
-        Detective adamPalmer =new Detective("Adam Palmer","DctvAP",1990,"Suspecting");
+        adamPalmer =new Detective("Adam Palmer","DctvAP",1990,"Suspecting");
     }
 
     boolean areCriminalsCaught()
@@ -290,7 +301,7 @@ class Police
     {
         if(areCriminalsCaught()==true)
         {
-            System.out.println(adamPalmer.name+" managed to catch the gang.");
+            System.out.println("\n"+adamPalmer.name+" managed to catch the gang.\n");
             if (gang.getsumRobbedValue() > 0) 
             {
             System.out.println("The stolen items are recovered. Their overall value is estimated to $" + gang.getsumRobbedValue());
